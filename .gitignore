@@ -1,3 +1,7 @@
+# Vscode generated .gitignore for C projects
+# vscode    
+.vscode/
+
 # Compiled binaries
 *.exe
 *.out
