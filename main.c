@@ -5,7 +5,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     load_postits();
     WNDCLASSEX wc = {sizeof(WNDCLASSEX), CS_HREDRAW | CS_VREDRAW, WndProc, 0, 0, hInstance, LoadIcon(NULL, IDI_APPLICATION), LoadCursor(NULL, IDC_ARROW), (HBRUSH)GetStockObject(WHITE_BRUSH), NULL, "PostItManager", NULL};
     RegisterClassEx(&wc);
-    HWND hwnd = CreateWindowEx(WS_EX_LAYERED | WS_EX_TOPMOST, "PostItManager", "Gestore Post-It", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 500, 420, NULL, NULL, hInstance, NULL);
+    HWND hwnd = CreateWindowEx(WS_EX_TOPMOST, "PostItManager", "Gestore Post-It", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 500, 420, NULL, NULL, hInstance, NULL);
     
     // Enable Mica effect for Windows 11 (commented out if not available)
     // enum DWM_SYSTEMBACKDROP_TYPE backdrop = DWMSBT_MAINWINDOW;
