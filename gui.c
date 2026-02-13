@@ -2,18 +2,11 @@
 
 HWND hList, hTitle, hContent;
 HFONT hFont;
-HICON hIconAdd, hIconEdit, hIconDelete, hIconSave;
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     switch (msg) {
         case WM_CREATE: {
-            hFont = CreateFont(18, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "Segoe UI");
-            
-            // Load icons
-            hIconAdd = LoadIcon(NULL, IDI_ASTERISK);
-            hIconEdit = LoadIcon(NULL, IDI_EXCLAMATION);
-            hIconDelete = LoadIcon(NULL, IDI_HAND);
-            hIconSave = LoadIcon(NULL, IDI_WINLOGO);
+            hFont = CreateFont(18, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "Segoe UI Variable");
             
             hList = CreateWindow("LISTBOX", NULL, WS_CHILD | WS_VISIBLE | WS_VSCROLL | LBS_NOTIFY | WS_BORDER, 20, 20, 360, 180, hwnd, (HMENU)IDC_LIST, NULL, NULL);
             SendMessage(hList, WM_SETFONT, (WPARAM)hFont, TRUE);
@@ -26,11 +19,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             hContent = CreateWindow("EDIT", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_MULTILINE | WS_VSCROLL | ES_AUTOVSCROLL, 100, 250, 280, 70, hwnd, (HMENU)IDC_CONTENT, NULL, NULL);
             SendMessage(hContent, WM_SETFONT, (WPARAM)hFont, TRUE);
             
-            // Modern flat buttons
-            CreateWindow("BUTTON", "Aggiungi", WS_CHILD | WS_VISIBLE | BS_FLAT, 20, 330, 100, 35, hwnd, (HMENU)IDC_ADD, NULL, NULL);
-            CreateWindow("BUTTON", "Modifica", WS_CHILD | WS_VISIBLE | BS_FLAT, 130, 330, 100, 35, hwnd, (HMENU)IDC_EDIT, NULL, NULL);
-            CreateWindow("BUTTON", "Elimina", WS_CHILD | WS_VISIBLE | BS_FLAT, 240, 330, 100, 35, hwnd, (HMENU)IDC_DELETE, NULL, NULL);
-            CreateWindow("BUTTON", "Salva & Esci", WS_CHILD | WS_VISIBLE | BS_FLAT, 350, 330, 120, 35, hwnd, (HMENU)IDC_SAVE, NULL, NULL);
+            // Windows 11 style buttons with icons
+            CreateWindow("BUTTON", "➕ Aggiungi", WS_CHILD | WS_VISIBLE | BS_FLAT, 20, 330, 100, 35, hwnd, (HMENU)IDC_ADD, NULL, NULL);
+            CreateWindow("BUTTON", "✏️ Modifica", WS_CHILD | WS_VISIBLE | BS_FLAT, 130, 330, 100, 35, hwnd, (HMENU)IDC_EDIT, NULL, NULL);
+            CreateWindow("BUTTON", "🗑️ Elimina", WS_CHILD | WS_VISIBLE | BS_FLAT, 240, 330, 100, 35, hwnd, (HMENU)IDC_DELETE, NULL, NULL);
+            CreateWindow("BUTTON", "💾 Salva & Esci", WS_CHILD | WS_VISIBLE | BS_FLAT, 350, 330, 120, 35, hwnd, (HMENU)IDC_SAVE, NULL, NULL);
             
             // Set fonts for buttons and statics
             EnumChildWindows(hwnd, (WNDENUMPROC)SetFontProc, (LPARAM)hFont);
@@ -40,27 +33,27 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
         }
         case WM_CTLCOLORSTATIC: {
             HDC hdc = (HDC)wParam;
-            SetBkColor(hdc, RGB(45, 45, 48)); // Dark background
-            SetTextColor(hdc, RGB(255, 255, 255)); // White text
-            return (LRESULT)CreateSolidBrush(RGB(45, 45, 48));
+            SetBkColor(hdc, RGB(255, 255, 255)); // White background
+            SetTextColor(hdc, RGB(0, 0, 0)); // Black text
+            return (LRESULT)CreateSolidBrush(RGB(255, 255, 255));
         }
         case WM_CTLCOLOREDIT: {
             HDC hdc = (HDC)wParam;
-            SetBkColor(hdc, RGB(30, 30, 30)); // Darker edit background
-            SetTextColor(hdc, RGB(255, 255, 255));
-            return (LRESULT)CreateSolidBrush(RGB(30, 30, 30));
+            SetBkColor(hdc, RGB(248, 248, 248)); // Light gray for edits
+            SetTextColor(hdc, RGB(0, 0, 0));
+            return (LRESULT)CreateSolidBrush(RGB(248, 248, 248));
         }
         case WM_CTLCOLORLISTBOX: {
             HDC hdc = (HDC)wParam;
-            SetBkColor(hdc, RGB(30, 30, 30));
-            SetTextColor(hdc, RGB(255, 255, 255));
-            return (LRESULT)CreateSolidBrush(RGB(30, 30, 30));
+            SetBkColor(hdc, RGB(248, 248, 248));
+            SetTextColor(hdc, RGB(0, 0, 0));
+            return (LRESULT)CreateSolidBrush(RGB(248, 248, 248));
         }
         case WM_CTLCOLORBTN: {
             HDC hdc = (HDC)wParam;
-            SetBkColor(hdc, RGB(63, 63, 70)); // Button background
-            SetTextColor(hdc, RGB(255, 255, 255));
-            return (LRESULT)CreateSolidBrush(RGB(63, 63, 70));
+            SetBkColor(hdc, RGB(230, 230, 230)); // Light button background
+            SetTextColor(hdc, RGB(0, 0, 0));
+            return (LRESULT)CreateSolidBrush(RGB(230, 230, 230));
         }
         case WM_COMMAND:
             switch (LOWORD(wParam)) {
@@ -93,10 +86,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             break;
         case WM_DESTROY:
             DeleteObject(hFont);
-            DestroyIcon(hIconAdd);
-            DestroyIcon(hIconEdit);
-            DestroyIcon(hIconDelete);
-            DestroyIcon(hIconSave);
             PostQuitMessage(0);
             break;
         default:
