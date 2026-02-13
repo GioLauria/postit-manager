@@ -20,10 +20,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             SendMessage(hContent, WM_SETFONT, (WPARAM)hFont, TRUE);
             
             // Windows 11 style buttons with icons
-            CreateWindow("BUTTON", "➕ Aggiungi", WS_CHILD | WS_VISIBLE | BS_FLAT, 20, 330, 100, 35, hwnd, (HMENU)IDC_ADD, NULL, NULL);
-            CreateWindow("BUTTON", "✏️ Modifica", WS_CHILD | WS_VISIBLE | BS_FLAT, 130, 330, 100, 35, hwnd, (HMENU)IDC_EDIT, NULL, NULL);
-            CreateWindow("BUTTON", "🗑️ Elimina", WS_CHILD | WS_VISIBLE | BS_FLAT, 240, 330, 100, 35, hwnd, (HMENU)IDC_DELETE, NULL, NULL);
-            CreateWindow("BUTTON", "💾 Salva & Esci", WS_CHILD | WS_VISIBLE | BS_FLAT, 350, 330, 120, 35, hwnd, (HMENU)IDC_SAVE, NULL, NULL);
+            CreateWindow("BUTTON", "+ Aggiungi", WS_CHILD | WS_VISIBLE | BS_FLAT, 20, 330, 100, 35, hwnd, (HMENU)IDC_ADD, NULL, NULL);
+            CreateWindow("BUTTON", "* Modifica", WS_CHILD | WS_VISIBLE | BS_FLAT, 130, 330, 100, 35, hwnd, (HMENU)IDC_EDIT, NULL, NULL);
+            CreateWindow("BUTTON", "X Elimina", WS_CHILD | WS_VISIBLE | BS_FLAT, 240, 330, 100, 35, hwnd, (HMENU)IDC_DELETE, NULL, NULL);
+            CreateWindow("BUTTON", "Salva & Esci", WS_CHILD | WS_VISIBLE | BS_FLAT, 350, 330, 120, 35, hwnd, (HMENU)IDC_SAVE, NULL, NULL);
             
             // Set fonts for buttons and statics
             EnumChildWindows(hwnd, (WNDENUMPROC)SetFontProc, (LPARAM)hFont);

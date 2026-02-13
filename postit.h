@@ -3,6 +3,19 @@
 
 #include <windows.h>
 
+// Control IDs
+#define IDC_LIST 1001
+#define IDC_TITLE 1002
+#define IDC_CONTENT 1003
+#define IDC_ADD 1004
+#define IDC_EDIT 1005
+#define IDC_DELETE 1006
+#define IDC_SAVE 1007
+
+// Function declarations
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK SetFontProc(HWND hwnd, LPARAM lParam);
+
 #define MAX_POSTITS 100
 #define MAX_TITLE 50
 #define MAX_CONTENT 200

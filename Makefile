@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -std=c99
-LDFLAGS=-mwindows
+LDFLAGS=-mwindows -lgdi32 -ldwmapi
 TARGET=postit_manager
 SOURCES=main.c postit.c gui.c
 
