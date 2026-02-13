@@ -2,11 +2,12 @@ CC=gcc
 CFLAGS=-Wall -Wextra -std=c99
 LDFLAGS=-mwindows
 TARGET=postit_manager
+SOURCES=main.c postit.c gui.c
 
 all: $(TARGET)
 
-$(TARGET): main.c
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $(TARGET) main.c
+$(TARGET): $(SOURCES)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(TARGET) $(SOURCES)
 
 clean:
 	rm -f $(TARGET) postits.txt

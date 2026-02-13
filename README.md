@@ -28,7 +28,10 @@ Si aprirà una finestra grafica con l'interfaccia per gestire i post-it.
 
 ## Struttura del progetto
 
-- `main.c`: Codice principale dell'applicazione con interfaccia Windows
+- `main.c`: Punto di ingresso dell'applicazione (WinMain)
+- `postit.h`: Header con definizioni e prototipi per la gestione dei post-it
+- `postit.c`: Implementazione delle funzioni per caricare, salvare e manipolare i post-it
+- `gui.c`: Codice per l'interfaccia grafica Windows
 - `Makefile`: Script per la compilazione
 - `postits.txt`: File di salvataggio (generato automaticamente)
 
