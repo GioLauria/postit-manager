@@ -26,6 +26,10 @@ make
 
 Si aprirà una finestra grafica con l'interfaccia per gestire i post-it.
 
+## Debugging
+
+Il progetto include configurazione VS Code per il debugging. Premi F5 in VS Code per avviare il debugger con GDB.
+
 ## Struttura del progetto
 
 - `main.c`: Punto di ingresso dell'applicazione (WinMain)
@@ -33,6 +37,7 @@ Si aprirà una finestra grafica con l'interfaccia per gestire i post-it.
 - `postit.c`: Implementazione delle funzioni per caricare, salvare e manipolare i post-it
 - `gui.c`: Codice per l'interfaccia grafica Windows
 - `Makefile`: Script per la compilazione
+- `.vscode/`: Configurazione per debugging in VS Code
 - `postits.txt`: File di salvataggio (generato automaticamente)
 
 ## Requisiti
