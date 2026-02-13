@@ -2,11 +2,18 @@
 
 HWND hList, hTitle, hContent;
 HFONT hFont;
+HICON hIconAdd, hIconEdit, hIconDelete, hIconSave;
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     switch (msg) {
         case WM_CREATE: {
             hFont = CreateFont(16, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "Segoe UI");
+            
+            // Load icons
+            hIconAdd = LoadIcon(NULL, IDI_ASTERISK);
+            hIconEdit = LoadIcon(NULL, IDI_EXCLAMATION);
+            hIconDelete = LoadIcon(NULL, IDI_HAND);
+            hIconSave = LoadIcon(NULL, IDI_WINLOGO);
             
             hList = CreateWindow("LISTBOX", NULL, WS_CHILD | WS_VISIBLE | WS_VSCROLL | LBS_NOTIFY, 20, 20, 360, 180, hwnd, (HMENU)IDC_LIST, NULL, NULL);
             SendMessage(hList, WM_SETFONT, (WPARAM)hFont, TRUE);
@@ -19,10 +26,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             hContent = CreateWindow("EDIT", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_MULTILINE | WS_VSCROLL | ES_AUTOVSCROLL, 90, 245, 290, 60, hwnd, (HMENU)IDC_CONTENT, NULL, NULL);
             SendMessage(hContent, WM_SETFONT, (WPARAM)hFont, TRUE);
             
-            CreateWindow("BUTTON", "Aggiungi", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 20, 320, 80, 30, hwnd, (HMENU)IDC_ADD, NULL, NULL);
-            CreateWindow("BUTTON", "Modifica", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 110, 320, 80, 30, hwnd, (HMENU)IDC_EDIT, NULL, NULL);
-            CreateWindow("BUTTON", "Elimina", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 200, 320, 80, 30, hwnd, (HMENU)IDC_DELETE, NULL, NULL);
-            CreateWindow("BUTTON", "Salva ed Esci", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 290, 320, 100, 30, hwnd, (HMENU)IDC_SAVE, NULL, NULL);
+            HWND hBtnAdd = CreateWindow("BUTTON", "Aggiungi", WS_CHILD | WS_VISIBLE | BS_ICON, 20, 320, 80, 30, hwnd, (HMENU)IDC_ADD, NULL, NULL);
+            SendMessage(hBtnAdd, BM_SETIMAGE, IMAGE_ICON, (LPARAM)hIconAdd);
+            
+            HWND hBtnEdit = CreateWindow("BUTTON", "Modifica", WS_CHILD | WS_VISIBLE | BS_ICON, 110, 320, 80, 30, hwnd, (HMENU)IDC_EDIT, NULL, NULL);
+            SendMessage(hBtnEdit, BM_SETIMAGE, IMAGE_ICON, (LPARAM)hIconEdit);
+            
+            HWND hBtnDelete = CreateWindow("BUTTON", "Elimina", WS_CHILD | WS_VISIBLE | BS_ICON, 200, 320, 80, 30, hwnd, (HMENU)IDC_DELETE, NULL, NULL);
+            SendMessage(hBtnDelete, BM_SETIMAGE, IMAGE_ICON, (LPARAM)hIconDelete);
+            
+            HWND hBtnSave = CreateWindow("BUTTON", "Salva ed Esci", WS_CHILD | WS_VISIBLE | BS_ICON, 290, 320, 100, 30, hwnd, (HMENU)IDC_SAVE, NULL, NULL);
+            SendMessage(hBtnSave, BM_SETIMAGE, IMAGE_ICON, (LPARAM)hIconSave);
             
             // Set fonts for buttons and statics
             EnumChildWindows(hwnd, (WNDENUMPROC)SetFontProc, (LPARAM)hFont);
@@ -76,6 +90,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
             break;
         case WM_DESTROY:
             DeleteObject(hFont);
+            DestroyIcon(hIconAdd);
+            DestroyIcon(hIconEdit);
+            DestroyIcon(hIconDelete);
+            DestroyIcon(hIconSave);
             PostQuitMessage(0);
             break;
         default:
