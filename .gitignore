@@ -11,6 +11,5 @@ postits.txt
 Thumbs.db
 
 # IDE files
-.vscode/
 *.swp
 *.swo
